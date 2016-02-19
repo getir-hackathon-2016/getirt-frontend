@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Getirt!</string>
+    <string name="action_settings">Settings</string>
+    <string name="description">İstediğiniz ürünü 10 dakikada ayağınıza getirir!</string>
+
+    <string name="login">Giriş yap!</string>
+    <string name="forgot_password">Şifreni mi unuttun?</string>
+    <string name="not_a_user">Daha hesabın yok mu? Üye ol!</string>
+
+    <string name="username">Kullanıcı adı</string>
+    <string name="password">Şifre</string>
+    <string name="email">Email</string>
+
+    <string name="register">Üye ol!</string>
+    <string name="register_description">Getirt avantajlarından yararlanma şansı yakala!</string>
+    <string name="already_a_user">Üye misin? giriş yap!</string>
+</resources>
