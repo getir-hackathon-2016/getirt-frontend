@@ -1,10 +1,12 @@
 package com.eer.getirt.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.eer.getirt.R;
 import com.eer.getirt.utils.RegisterUtils;
@@ -26,6 +28,15 @@ public class RegisterActivity extends AppCompatActivity {
         Button buttonRegister = (Button)findViewById(R.id.register_button);
 
         buttonRegister.setOnClickListener(new RegisterClickListener(editTextUsername, editTextPassword, editTextEmail));
+
+        TextView textViewAlreadyAUser = (TextView)findViewById(R.id.already_a_user);
+        textViewAlreadyAUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
