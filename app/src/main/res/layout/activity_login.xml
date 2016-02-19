@@ -33,7 +33,7 @@
 
         <EditText
             android:layout_marginTop="40dp"
-            android:id="@+id/login_username"
+            android:id="@+id/login_edit_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/LoginEditText"
@@ -42,7 +42,7 @@
             android:hint="@string/username"/>
 
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/login_edit_text_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
