@@ -25,23 +25,28 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button buttonRegister = (Button)findViewById(R.id.register_button);
 
-        String username = editTextUsername.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
-
-        buttonRegister.setOnClickListener(new RegisterClickListener(username, password, email));
+        buttonRegister.setOnClickListener(new RegisterClickListener(editTextUsername, editTextPassword, editTextEmail));
 
     }
 
+    /**
+     * An OnClickListener implementation to get EditText views dynamically.
+     */
     public class RegisterClickListener implements View.OnClickListener {
-        String username, password, email;
-        public RegisterClickListener(String username, String password, String email){
-            this.username = username;
-            this.password = password;
-            this.email = email;
+        EditText editTextUsername, editTextPassword, editTextEmail;
+
+        public RegisterClickListener(EditText editTextUsername, EditText editTextPassword, EditText editTextEmail){
+            this.editTextUsername = editTextUsername;
+            this.editTextPassword = editTextPassword;
+            this.editTextEmail = editTextEmail;
         }
+
         @Override
         public void onClick(View view) {
+            String username = editTextUsername.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
+            String email = editTextEmail.getText().toString().trim();
+
             RegisterUtils.RegisterAsyncTask registerAsyncTask = new RegisterUtils().
                     new RegisterAsyncTask(username, password, email, RegisterActivity.this);
             registerAsyncTask.execute();
