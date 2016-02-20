@@ -1,8 +1,11 @@
 package com.eer.getirt.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.widget.ImageButton;
 
 import com.eer.getirt.R;
 import com.eer.getirt.maps.MapClickListener;
+import com.eer.getirt.utils.SessionController;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,6 +57,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(i);
             }
         });
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.left_drawer);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.menu_logout:{
+                        SessionController sessionController = new SessionController(MainActivity.this);
+                        sessionController.deleteSession();
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i);
+                    }
+                }
+                return false;
+            }
+        });
+
 
         SupportMapFragment mapFragment = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map));
         mapFragment.getMapAsync(this);
