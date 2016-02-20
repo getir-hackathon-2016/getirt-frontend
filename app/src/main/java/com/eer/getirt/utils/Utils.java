@@ -23,11 +23,16 @@ import java.io.IOException;
  */
 public class Utils {
 
-    public static JSONObject makeRequest(String requestUrl){
+    public static JSONObject makeRequest(String requestUrl, Context context){
+
+        SessionController sessionController = new SessionController((Activity)context);
+        String sessionId = sessionController.getSessionId();
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .header("appsecret", Constants.appSecret)
+                .header("sessioncode", sessionId)
                 .url(requestUrl)
                 .build();
 

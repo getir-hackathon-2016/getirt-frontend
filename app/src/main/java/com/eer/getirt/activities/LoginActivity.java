@@ -1,5 +1,6 @@
 package com.eer.getirt.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,6 +52,15 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         });
+
+        Intent i = getIntent();
+        boolean fromRegister = i.getBooleanExtra("from_register", false);
+        if(fromRegister){
+            View v = findViewById(R.id.login_layout);
+            Snackbar
+                    .make(v, "Kayıt başarılı! Giriş yapabilirsiniz.", Snackbar.LENGTH_LONG)
+                    .show();
+        }
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

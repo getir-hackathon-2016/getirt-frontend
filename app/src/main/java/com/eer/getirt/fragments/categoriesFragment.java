@@ -80,7 +80,7 @@ public class CategoriesFragment extends Fragment {
 
         @Override
         protected JSONObject doInBackground(Void... voids) {
-            return ConnectionManager.getAllCategories();
+            return ConnectionManager.getAllCategories(getActivity());
         }
 
         @Override
@@ -97,10 +97,10 @@ public class CategoriesFragment extends Fragment {
                             .make(v, message, Snackbar.LENGTH_SHORT)
                             .show();
                 }else{
-                    JSONArray jsonCategoriesArray = resultObject.getJSONArray("kategoriler");
+                    JSONArray jsonCategoriesArray = resultObject.getJSONArray("categories");
                     for(int i = 0; i < jsonCategoriesArray.length(); i++){
                         JSONObject jsonCategory = jsonCategoriesArray.getJSONObject(i);
-                        String name = jsonCategory.getString("ad");
+                        String name = jsonCategory.getString("name");
                         String id = jsonCategory.getString("_id");
                         Category cat = new Category(id, name);
                         categories.add(cat);

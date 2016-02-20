@@ -103,7 +103,7 @@ public class ProductsActivity extends AppCompatActivity {
         }
         @Override
         protected JSONObject doInBackground(Void... voids) {
-            return ConnectionManager.getProducts(categoryId, limitNumber, skipNumber);
+            return ConnectionManager.getProducts(categoryId, limitNumber, skipNumber, ProductsActivity.this);
         }
 
         @Override
@@ -125,10 +125,10 @@ public class ProductsActivity extends AppCompatActivity {
                     });
                     snackBar.show();
                 }else{
-                    JSONArray jsonProductsArray = jsonObject.getJSONArray("urunler");
+                    JSONArray jsonProductsArray = jsonObject.getJSONArray("products");
                     for(int i = 0; i < jsonProductsArray.length(); i++){
                         JSONObject productObject = jsonProductsArray.getJSONObject(i);
-                        Product p = new Product(productObject.getString("urunAdi"), productObject.getString("fiyat"), false);
+                        Product p = new Product(productObject.getString("name"), productObject.getString("price"), false);
                         products.add(p);
                     }
                     rvProductsAdapter.changeDataList(products);

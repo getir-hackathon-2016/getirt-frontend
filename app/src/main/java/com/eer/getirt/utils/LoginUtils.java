@@ -40,14 +40,14 @@ public class LoginUtils{
 
     public JSONObject attemptLogin(String email, String password){
 
-        String requestUrl = Constants.serverUrl + "/giris";
+        String requestUrl = Constants.serverUrl + "/login";
         Log.d("Request url : ", requestUrl);
 
         OkHttpClient client = new OkHttpClient();
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("parola", password);
+            jsonObject.put("password", password);
             jsonObject.put("email", email);
         }catch(JSONException e){
             Log.d("Exception ocurred : ", e.getMessage());
@@ -131,10 +131,8 @@ public class LoginUtils{
                         .make(v, message, Snackbar.LENGTH_SHORT)
                         .show();
             }else{
-                SharedPreferences sharedpreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("session_id", message);
-                editor.commit();
+                SessionController sessionController = new SessionController((Activity)context);
+                sessionController.createSession(message);
 
                 Intent i = new Intent(context, MainActivity.class);
                 context.startActivity(i);

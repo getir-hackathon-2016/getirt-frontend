@@ -30,5 +30,9 @@ public class SessionController {
         editor.commit();
     }
 
+    public String getSessionId(){
+        return(sharedPreferences.getString("session_id", ""));
+    }
+
 
 }

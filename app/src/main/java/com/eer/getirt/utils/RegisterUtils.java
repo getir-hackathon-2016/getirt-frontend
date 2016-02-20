@@ -129,10 +129,11 @@ public class RegisterUtils{
             if(!result){
                 View v = ((Activity)context).findViewById(R.id.register_layout);
                 Snackbar
-                        .make(v, message, Snackbar.LENGTH_SHORT)
+                        .make(v, message, Snackbar.LENGTH_LONG)
                         .show();
             }else{
                 Intent i = new Intent(context, LoginActivity.class);
+                i.putExtra("from_register", true);
                 context.startActivity(i);
             }
 
