@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Product {
     String productName;
     String productPriceStr;
-    double priceDouble;
     String categoryName;
 
 

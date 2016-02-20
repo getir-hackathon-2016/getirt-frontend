@@ -30,6 +30,7 @@
         <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.ProductsActivity" />
+        <activity android:name=".activities.BasketActivity" />
     </application>
 
 </manifest>

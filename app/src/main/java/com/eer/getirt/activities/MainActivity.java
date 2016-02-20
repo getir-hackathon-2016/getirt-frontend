@@ -8,6 +8,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.eer.getirt.R;
 import com.eer.getirt.maps.MapClickListener;
@@ -42,6 +44,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 (this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        ImageButton imageButtonBasket = (ImageButton)findViewById(R.id.main_image_button_basket);
+        imageButtonBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, BasketActivity.class);
+                startActivity(i);
+            }
+        });
 
         SupportMapFragment mapFragment = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map));
         mapFragment.getMapAsync(this);

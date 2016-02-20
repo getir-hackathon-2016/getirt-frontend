@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.eer.getirt.R;
+import com.eer.getirt.adapters.RVBasketAdapter;
+import com.eer.getirt.models.BasketProduct;
 
 /**
  * Created by Ergun on 20.02.2016.
@@ -30,7 +32,8 @@ public class BasketActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-
+        RVBasketAdapter rvBasketAdapter = new RVBasketAdapter(BasketProduct.getDummyBasketData());
+        rv.setAdapter(rvBasketAdapter);
 
     }
 
