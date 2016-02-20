@@ -12,7 +12,11 @@ import android.view.View;
 import com.eer.getirt.R;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -26,40 +30,63 @@ import java.io.IOException;
 public class RegisterUtils{
 
     /**
-     * Sends a get request to the server to register a user.
+     * Sends a post request to the server to register a user.
      * @param username
      * @param password
      * @param email
      * @return result - result from the server, whether register is successful or not
      */
 
-    public String attemptRegister(String username, String password, String email){
+    public JSONObject attemptRegister(String username, String password, String email){
 
-        String requestUrl = Constants.serverUrl + "/register/" + username + "/" + email + "/" + password;
+        String requestUrl = Constants.serverUrl + "/register";
         Log.d("Request url : ", requestUrl);
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ad", username);
+            jsonObject.put("parola", password);
+            jsonObject.put("email", email);
+        }catch(JSONException e){
+            Log.d("Exception ocurred : ", e.getMessage());
+        }
+
+        RequestBody requestBody = RequestBody.create(Constants.JSON, jsonObject.toString());
+        Log.d("Request body : ", jsonObject.toString());
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .url(requestUrl)
+                .post(requestBody)
+                .header("Content-Type", "application/json")
                 .header("appsecret", Constants.appSecret)
                 .build();
 
         Response response = null;
         try {
             response = client.newCall(request).execute();
-            return response.body().string();
+            return new JSONObject(response.body().string());
         }catch(IOException ex){
             Log.d("register exception : ", ex.getMessage());
+        }catch(JSONException ex){
+            Log.d("json expection :", ex.getMessage());
         }
 
-        return "false:basarisiz";
+        JSONObject jsonResult = new JSONObject();
+        try {
+            jsonResult.put("result", false);
+            jsonResult.put("message", "Başarısız");
+        }catch(JSONException ex){
+            Log.d("json exception : ", ex.getMessage());
+        }
+
+        return jsonResult;
     }
 
     /**
      * AsnycTask class to send the http request asynchronously.
      */
-    public class RegisterAsyncTask extends AsyncTask<Void, Void, String>{
+    public class RegisterAsyncTask extends AsyncTask<Void, Void, JSONObject>{
 
         ProgressDialog progress;
 
@@ -81,32 +108,33 @@ public class RegisterUtils{
         }
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected JSONObject doInBackground(Void... voids) {
             return attemptRegister(username, password, email);
         }
 
         @Override
-        protected void onPostExecute(String result){
-            try {
-                String registerResult = result.split(":")[0]; //servers sends like "true:basariyla üye oldunuz"
-                String registerMessage = result.split(":")[1];
-                if(registerResult.equals("false")) {
-                    View v = ((Activity)context).findViewById(R.id.register_layout);
-                    Snackbar
-                            .make(v, registerMessage, Snackbar.LENGTH_SHORT)
-                            .show();
-                }else{
-                    //intent ile main activitye gönderilecek, dönen değer kayıt edilecek filan.
-                }
-            }catch (Exception e){
+        protected void onPostExecute(JSONObject resultObject){
+            boolean result = false;
+            String message = "Bir hata oluştu.";
+
+            try{
+                result = resultObject.getBoolean("result");
+                message = resultObject.getString("message");
+            }catch(JSONException e){
+                Log.d("json exception : ", e.getMessage());
+            }
+
+            if(!result){
                 View v = ((Activity)context).findViewById(R.id.register_layout);
                 Snackbar
-                        .make(v, "Bir hata oluştu :(", Snackbar.LENGTH_SHORT)
+                        .make(v, message, Snackbar.LENGTH_SHORT)
                         .show();
+            }else{
+                //intent ile logine
             }
 
             progress.dismiss();
-            Log.d("Kayit durumu : ", result);
+            Log.d("Kayit durumu : ", message);
         }
     }
 

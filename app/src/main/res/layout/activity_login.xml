@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
+    android:id="@+id/login_layout"
     android:background="@color/colorPrimary">
 
     <LinearLayout
@@ -39,7 +40,7 @@
             android:theme="@style/LoginEditText"
             android:textColor="@color/colorText"
             android:textSize="18sp"
-            android:hint="@string/username"/>
+            android:hint="@string/email"/>
 
         <EditText
             android:id="@+id/login_edit_text_password"
@@ -62,11 +63,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
             android:text="@string/forgot_password"
             android:layout_gravity="right"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
             />
         <LinearLayout

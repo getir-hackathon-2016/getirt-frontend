@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonLogin = (Button)findViewById(R.id.login_button);
 
         buttonLogin.setOnClickListener(new LoginClickListener(editTextEmail, editTextPassword));
-        
+
         TextView textViewRegister = (TextView)findViewById(R.id.login_text_view_register);
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
