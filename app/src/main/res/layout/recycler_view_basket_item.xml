@@ -54,6 +54,8 @@
                 android:id="@+id/basket_item_image_button_minus"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:scaleType="fitCenter"
+                android:background="#00000000"
                 android:src="@mipmap/ic_minus"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>

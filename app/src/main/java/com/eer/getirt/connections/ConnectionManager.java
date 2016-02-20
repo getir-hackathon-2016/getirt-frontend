@@ -22,6 +22,10 @@ public class ConnectionManager {
                 "/" + limitNumber;
         return Utils.makeRequest(requestUrl, context);
     }
-    
+
+    public static JSONObject getBasketProducts(Context context){
+        String requestUrl = Constants.serverUrl + "/orderproducts";
+        return Utils.makeRequest(requestUrl, context);
+    }
 
 }

@@ -62,4 +62,9 @@ public class RVBasketAdapter extends RecyclerView.Adapter<RVBasketAdapter.Basket
         return basketProducts.size();
     }
 
+    public void changeDataList(ArrayList<BasketProduct> basketProducts){
+        this.basketProducts = basketProducts;
+        notifyDataSetChanged();
+    }
+
 }
