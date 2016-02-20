@@ -85,6 +85,13 @@
                 android:textSize="16sp"
                 android:text="10 Dakika"/>
         </RelativeLayout>
+        <fragment
+            android:id="@+id/catt"
+            android:name="com.eer.getirt.fragments.CategoriesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </fragment>
     </LinearLayout>
 
     <!-- The navigation drawer -->
