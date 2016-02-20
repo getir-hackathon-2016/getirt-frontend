@@ -58,12 +58,12 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Ca
         return categories.size();
     }
 
-    public void changeDataSet(ArrayList<Category> categoryList){
+    public void changeDataList(ArrayList<Category> categoryList){
         this.categories = categoryList;
         notifyDataSetChanged();
     }
 
-    public ArrayList<Category> getDataSet(){
+    public ArrayList<Category> getDataList(){
         return categories;
     }
 

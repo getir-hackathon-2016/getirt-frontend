@@ -2,6 +2,7 @@ package com.eer.getirt.connections;
 
 import com.eer.getirt.models.Category;
 import com.eer.getirt.utils.Constants;
+import com.eer.getirt.utils.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -19,30 +20,14 @@ public class ConnectionManager {
 
     public static JSONObject getAllCategories(){
         String requestUrl = Constants.serverUrl + "/kategoriler";
+        return Utils.makeRequest(requestUrl);
+    }
 
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .header("appsecret", Constants.appSecret)
-                .url(requestUrl)
-                .build();
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            return new JSONObject(response.body().string());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch(JSONException e){
-            e.printStackTrace();
-        }
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("result", false);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonObject;
+    public static JSONObject getProducts(String categoryId, int limitNumber, int skipNumber){
+        String requestUrl = Constants.serverUrl + "/kategoriUrunleri/" + categoryId +
+                "/" + skipNumber +
+                "/" + limitNumber;
+        return Utils.makeRequest(requestUrl);
     }
 
 }

@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,7 @@ public class CategoriesFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(getActivity(), ProductsActivity.class);
-                i.putExtra("category_id", rvCategoryAdapter.getDataSet().get(position).getId());
+                i.putExtra("category_id", rvCategoryAdapter.getDataList().get(position).getId());
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
@@ -105,7 +104,7 @@ public class CategoriesFragment extends Fragment {
                         Category cat = new Category(id, name);
                         categories.add(cat);
                     }
-                    rvCategoryAdapter.changeDataSet(categories);
+                    rvCategoryAdapter.changeDataList(categories);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
