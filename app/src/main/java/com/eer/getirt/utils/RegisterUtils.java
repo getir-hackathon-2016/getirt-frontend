@@ -3,6 +3,7 @@ package com.eer.getirt.utils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.eer.getirt.R;
+import com.eer.getirt.activities.LoginActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -130,7 +132,8 @@ public class RegisterUtils{
                         .make(v, message, Snackbar.LENGTH_SHORT)
                         .show();
             }else{
-                //intent ile logine
+                Intent i = new Intent(context, LoginActivity.class);
+                context.startActivity(i);
             }
 
             progress.dismiss();

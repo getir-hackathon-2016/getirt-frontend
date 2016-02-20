@@ -3,6 +3,7 @@ package com.eer.getirt.utils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -127,6 +128,10 @@ public class LoginUtils{
                         .make(v, message, Snackbar.LENGTH_SHORT)
                         .show();
             }else{
+                SharedPreferences sharedpreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("session_id", message);
+                editor.commit();
                 //login olumlu
             }
 
