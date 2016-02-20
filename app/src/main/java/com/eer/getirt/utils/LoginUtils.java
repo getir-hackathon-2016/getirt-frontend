@@ -136,7 +136,6 @@ public class LoginUtils{
             }
 
             progress.dismiss();
-            Log.d("Giris durumu : ", message);
         }
     }
 
