@@ -46,7 +46,7 @@ public class ProductsActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(gridLayoutManager);
 
-        final RVProductsAdapter rvProductsAdapter = new RVProductsAdapter(Product.getDummyData());
+        final RVProductsAdapter rvProductsAdapter = new RVProductsAdapter(Product.getDummyData(), this);
         rv.setAdapter(rvProductsAdapter);
         rv.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -128,7 +128,7 @@ public class ProductsActivity extends AppCompatActivity {
                     JSONArray jsonProductsArray = jsonObject.getJSONArray("urunler");
                     for(int i = 0; i < jsonProductsArray.length(); i++){
                         JSONObject productObject = jsonProductsArray.getJSONObject(i);
-                        Product p = new Product(productObject.getString("urunAdi"), productObject.getString("fiyat"));
+                        Product p = new Product(productObject.getString("urunAdi"), productObject.getString("fiyat"), false);
                         products.add(p);
                     }
                     rvProductsAdapter.changeDataList(products);

@@ -1,5 +1,7 @@
 package com.eer.getirt.adapters;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,13 +26,17 @@ public class RVProductsAdapter extends RecyclerView.Adapter<RVProductsAdapter.Pr
 
         public ProductsViewHolder(View itemView) {
             super(itemView);
+            cv = (CardView)itemView.findViewById(R.id.product_item_layout_card_view);
             textViewPrice = (TextView)itemView.findViewById(R.id.product_item_text_view_price);
             textViewName = (TextView)itemView.findViewById(R.id.product_item_text_view_name);
         }
     }
+
+    Context context;
     ArrayList<Product> products = new ArrayList<>();
-    public RVProductsAdapter(ArrayList<Product> products){
+    public RVProductsAdapter(ArrayList<Product> products, Context context){
         this.products = products;
+        this.context = context;
     }
 
     @Override

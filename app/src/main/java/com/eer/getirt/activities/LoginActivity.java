@@ -1,6 +1,8 @@
 package com.eer.getirt.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +23,18 @@ import com.eer.getirt.utils.LoginUtils;
  * @author Ergun Erdogmus
  */
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences sharedpreferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+        String sessionId = sharedpreferences.getString("session_id", "");
+        if(!sessionId.equals("")){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }
 
         EditText editTextEmail = (EditText)findViewById(R.id.login_edit_text_email);
         EditText editTextPassword = (EditText)findViewById(R.id.login_edit_text_password);

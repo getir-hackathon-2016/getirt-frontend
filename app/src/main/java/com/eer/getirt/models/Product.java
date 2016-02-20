@@ -12,9 +12,18 @@ public class Product {
     double priceDouble;
     String categoryName;
 
-    public Product(String productName, String productPriceStr){
+
+    boolean isOnBasket;
+
+    public Product(String productName, String productPriceStr, boolean isOnBasket){
         this.productName = productName;
         this.productPriceStr = productPriceStr;
+        this.isOnBasket = isOnBasket;
+    }
+
+
+    public boolean isOnBasket() {
+        return isOnBasket;
     }
 
     public String getCategoryName() {
@@ -32,7 +41,7 @@ public class Product {
     public static ArrayList<Product> getDummyData(){
         ArrayList<Product> products = new ArrayList<Product>();
         for(int i = 0; i < 10; i++){
-            products.add(new Product("Product name " + i, "5,00"));
+            products.add(new Product("Product name " + i, "5,00", true));
         }
         return products;
     }

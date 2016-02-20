@@ -139,7 +139,7 @@ public class LoginUtils{
                 Intent i = new Intent(context, MainActivity.class);
                 context.startActivity(i);
                 ((Activity)context).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out);
-                
+
             }
 
             progress.dismiss();
