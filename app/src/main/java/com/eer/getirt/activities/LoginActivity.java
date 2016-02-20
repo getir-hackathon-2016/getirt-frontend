@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         });
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
