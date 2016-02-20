@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/products_layout"
+    android:background="#dadada"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -25,12 +27,21 @@
                 android:src="@mipmap/ic_shopping_cart"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/products_text_view_static"
+        android:layout_width="wrap_content"
+        android:textColor="#505050"
+        android:padding="10dp"
+        android:layout_below="@id/products_app_bar_layout"
+        android:layout_height="wrap_content"
+        android:text="Sepetteki ürünleriniz."/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/products_app_bar_layout"
+        android:layout_below="@id/products_text_view_static"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F0F0F0"
+        android:elevation="4dp"
         android:id="@+id/products_rv" />
 
     <android.support.design.widget.FloatingActionButton

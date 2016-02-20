@@ -82,13 +82,13 @@ public class BasketActivity extends AppCompatActivity {
             try{
                 result = jsonObject.getBoolean("result");
                 if(!result){
+
                     message = jsonObject.getString("message");
                     View v = (BasketActivity.this).findViewById(R.id.basket_rv);
                     Snackbar
                             .make(v, message, Snackbar.LENGTH_SHORT)
                             .show();
                 }else{
-
                     JSONArray jsonBasketProductsArray = jsonObject.getJSONArray("basketProducts");
                     //String basketProduct = jsonObject.getString("basketProducts");
                     for(int i = 0; i < jsonBasketProductsArray.length(); i++){
@@ -96,8 +96,9 @@ public class BasketActivity extends AppCompatActivity {
                         String name = jsonBasketProduct.getString("name");
                         String price = jsonBasketProduct.getString("price");
                         String quantity = jsonBasketProduct.getString("number");
+                        String productId = jsonBasketProduct.getString("_id");
 
-                        BasketProduct basketProduct = new BasketProduct(name, price, quantity);
+                        BasketProduct basketProduct = new BasketProduct(name, price, quantity, productId);
                         basketProducts.add(basketProduct);
                     }
                     //Log.d("Basket products : ", basketProduct);

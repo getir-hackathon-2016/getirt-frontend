@@ -9,8 +9,8 @@ public class BasketProduct extends Product {
 
     String productQuantity;
 
-    public BasketProduct(String productName, String productPriceStr, String productQuantity) {
-        super(productName, productPriceStr, true);
+    public BasketProduct(String productName, String productPriceStr, String productQuantity, String productId) {
+        super(productName, productPriceStr, productId);
         this.productQuantity = productQuantity;
     }
 
@@ -21,7 +21,7 @@ public class BasketProduct extends Product {
     public static ArrayList<BasketProduct> getDummyBasketData(){
         ArrayList<BasketProduct> products = new ArrayList<>();
         for(int i = 0; i < 5; i++){
-            products.add(new BasketProduct("Name " + i, "" + i, "" + (i + 3)));
+            products.add(new BasketProduct("Name " + i, "" + i, "" + (i + 3), "denemeId"));
         }
         return products;
     }

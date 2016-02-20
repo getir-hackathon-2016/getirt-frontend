@@ -54,8 +54,7 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Product product = rvProductsAdapter.getDataList().get(position);
-
-
+                new AddToBasketAsyncTask(product.getProductId()).execute();
             }
         }));
 
@@ -68,6 +67,7 @@ public class ProductsActivity extends AppCompatActivity {
                 builder.setTitle("Ürün öner");
 
                 AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });
@@ -142,7 +142,8 @@ public class ProductsActivity extends AppCompatActivity {
                     JSONArray jsonProductsArray = jsonObject.getJSONArray("products");
                     for(int i = 0; i < jsonProductsArray.length(); i++){
                         JSONObject productObject = jsonProductsArray.getJSONObject(i);
-                        Product p = new Product(productObject.getString("name"), productObject.getString("price"), false);
+                        Product p = new Product(productObject.getString("name"),
+                                productObject.getString("price"), productObject.getString("_id"));
                         products.add(p);
                     }
                     rvProductsAdapter.changeDataList(products);
@@ -152,6 +153,43 @@ public class ProductsActivity extends AppCompatActivity {
             }
             progressDialog.dismiss();
         }
+    }
+
+    class AddToBasketAsyncTask extends AsyncTask<Void, Void, JSONObject>{
+
+        String productId;
+
+        public AddToBasketAsyncTask(String productId){
+            this.productId = productId;
+        }
+
+        ProgressDialog progressDialog = new ProgressDialog(ProductsActivity.this);
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog.setMessage("Sepete ekleniyor.");
+            progressDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+            return ConnectionManager.addToBasket(ProductsActivity.this, productId);
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject){
+            progressDialog.dismiss();
+            boolean result = false;
+            try {
+                Snackbar.make(ProductsActivity.this.findViewById(R.id.products_layout),
+                        jsonObject.getString("message"), Snackbar.LENGTH_LONG)
+                        .show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
 }
