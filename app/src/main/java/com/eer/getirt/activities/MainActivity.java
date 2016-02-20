@@ -56,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         .title("Senin adresin"));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(-33.86997, 151.2089), 10));
+                new LatLng(-33.86997, 151.2089), 15));
         map.setIndoorEnabled(false);
 
         map.setOnMapClickListener(new MapClickListener(map, marker));
         // Other supported types include: MAP_TYPE_NORMAL,
         // MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
     }
+
 }

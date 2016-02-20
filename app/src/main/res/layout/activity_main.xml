@@ -20,23 +20,71 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/ToolbarTheme"
                 app:theme="@style/ToolbarTheme">
-
+            <android.support.v7.widget.AppCompatImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:background="#00ffffff"
+                android:layout_gravity="right"
+                android:src="@mipmap/ic_shopping_cart"/>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
+        <LinearLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_search"/>
+            <EditText
+                android:id="@+id/main_edit_text_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/main_edit_text_search_background"
+                android:textColorHint="#aeaeae"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorPrimary"
+                android:hint="Ürün ara..."/>
+        </LinearLayout>
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
-        <LinearLayout
-            android:id="@+id/main_search_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:elevation="4dp"
             android:background="#FFFFFF">
-
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Kategoriler"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:layout_alignParentRight="true"
+                android:textSize="16sp"
+                android:text="10 Dakika"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <!-- The navigation drawer -->
