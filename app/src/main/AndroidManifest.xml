@@ -3,7 +3,7 @@
     package="com.eer.getirt" >
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -21,13 +21,13 @@
             android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.MainActivity">
         </activity>
         <activity android:name=".activities.ProductsActivity" />
     </application>

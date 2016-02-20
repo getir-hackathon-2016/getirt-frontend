@@ -41,13 +41,13 @@ public class RegisterUtils{
 
     public JSONObject attemptRegister(String username, String password, String email){
 
-        String requestUrl = Constants.serverUrl + "/kaydol";
+        String requestUrl = Constants.serverUrl + "/register";
         Log.d("Request url : ", requestUrl);
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("ad", username);
-            jsonObject.put("parola", password);
+            jsonObject.put("name", username);
+            jsonObject.put("password", password);
             jsonObject.put("email", email);
         }catch(JSONException e){
             Log.d("Exception ocurred : ", e.getMessage());

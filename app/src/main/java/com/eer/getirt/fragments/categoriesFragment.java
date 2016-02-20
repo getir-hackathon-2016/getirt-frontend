@@ -51,6 +51,7 @@ public class CategoriesFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(getActivity(), ProductsActivity.class);
                 i.putExtra("category_id", rvCategoryAdapter.getDataList().get(position).getId());
+                i.putExtra("category_name", rvCategoryAdapter.getDataList().get(position).getName());
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }

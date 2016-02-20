@@ -1,6 +1,12 @@
 package com.eer.getirt.utils;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -16,12 +22,6 @@ import java.io.IOException;
  * Created by Ergun on 20.02.2016.
  */
 public class Utils {
-
-    public static void showSnackbar(View v, String message){
-        Snackbar
-                .make(v, message, Snackbar.LENGTH_SHORT)
-                .show();
-    }
 
     public static JSONObject makeRequest(String requestUrl){
         OkHttpClient client = new OkHttpClient();

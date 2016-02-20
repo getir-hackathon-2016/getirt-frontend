@@ -1,6 +1,5 @@
 package com.eer.getirt.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,12 +10,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.eer.getirt.R;
 import com.eer.getirt.adapters.RVProductsAdapter;
 import com.eer.getirt.connections.ConnectionManager;
 import com.eer.getirt.models.Product;
+import com.eer.getirt.utils.RecyclerItemClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +36,6 @@ public class ProductsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.products_toolbar);
         toolbar.setTitle("Getirt!");
-        toolbar.setSubtitle("Ürünler");
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,20 +46,41 @@ public class ProductsActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(gridLayoutManager);
 
-        RVProductsAdapter rvProductsAdapter = new RVProductsAdapter(Product.getDummyData());
+        final RVProductsAdapter rvProductsAdapter = new RVProductsAdapter(Product.getDummyData());
         rv.setAdapter(rvProductsAdapter);
+        rv.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Product product = rvProductsAdapter.getDataList().get(position);
+
+
+            }
+        }));
+
 
         Intent intent = getIntent();
         String categoryId = intent.getStringExtra("category_id");
+        String categoryName = intent.getStringExtra("category_name");
+        toolbar.setSubtitle(categoryName);
 
         new GetProductsAsyncTask(categoryId, 10, 0, rvProductsAdapter).execute();
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(this, MainActivity.class);
+        startActivityForResult(myIntent, 0);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        return true;
+    }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
     }
 
     class GetProductsAsyncTask extends AsyncTask<Void, Void, JSONObject> {
-
 
         RVProductsAdapter rvProductsAdapter;
         String categoryId;
@@ -95,9 +116,14 @@ public class ProductsActivity extends AppCompatActivity {
                 if(!result){
                     String message = jsonObject.getString("message");
                     View v = (ProductsActivity.this).findViewById(R.id.products_rv);
-                    Snackbar
-                            .make(v, message, Snackbar.LENGTH_SHORT)
-                            .show();
+                    final Snackbar snackBar = Snackbar.make(v, message, Snackbar.LENGTH_INDEFINITE);
+                    snackBar.setAction("Kapat", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            snackBar.dismiss();
+                        }
+                    });
+                    snackBar.show();
                 }else{
                     JSONArray jsonProductsArray = jsonObject.getJSONArray("urunler");
                     for(int i = 0; i < jsonProductsArray.length(); i++){
@@ -113,4 +139,5 @@ public class ProductsActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     }
+
 }

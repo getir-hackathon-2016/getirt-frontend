@@ -3,6 +3,7 @@ package com.eer.getirt.utils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.eer.getirt.R;
+import com.eer.getirt.activities.LoginActivity;
+import com.eer.getirt.activities.MainActivity;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -132,7 +135,11 @@ public class LoginUtils{
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("session_id", message);
                 editor.commit();
-                //login olumlu
+
+                Intent i = new Intent(context, MainActivity.class);
+                context.startActivity(i);
+                ((Activity)context).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out);
+                
             }
 
             progress.dismiss();
