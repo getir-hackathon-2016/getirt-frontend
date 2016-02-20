@@ -63,4 +63,8 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Ca
         notifyDataSetChanged();
     }
 
+    public ArrayList<Category> getDataSet(){
+        return categories;
+    }
+
 }

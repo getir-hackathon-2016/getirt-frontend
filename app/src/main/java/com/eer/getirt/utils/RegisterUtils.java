@@ -41,7 +41,7 @@ public class RegisterUtils{
 
     public JSONObject attemptRegister(String username, String password, String email){
 
-        String requestUrl = Constants.serverUrl + "/register";
+        String requestUrl = Constants.serverUrl + "/kaydol";
         Log.d("Request url : ", requestUrl);
 
         JSONObject jsonObject = new JSONObject();

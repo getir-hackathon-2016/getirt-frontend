@@ -37,7 +37,7 @@ public class LoginUtils{
 
     public JSONObject attemptLogin(String email, String password){
 
-        String requestUrl = Constants.serverUrl + "/login";
+        String requestUrl = Constants.serverUrl + "/giris";
         Log.d("Request url : ", requestUrl);
 
         OkHttpClient client = new OkHttpClient();
