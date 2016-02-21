@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.eer.getirt.R;
 import com.eer.getirt.connections.ConnectionManager;
+import com.eer.getirt.utils.SessionController;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
@@ -43,7 +44,6 @@ import java.net.URISyntaxException;
  * of messenger with using a socket then pin that location on the map.
  * Created by Ergun on 21.02.2016.
  */
-
 public class OrderConfirmedActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -57,6 +57,7 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
     SupportMapFragment mapFragment;
     Marker messengerMarker;
     GoogleApiClient mGoogleApiClient;
+    String sessiodId;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -66,6 +67,9 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
         Toolbar toolbar = (Toolbar)findViewById(R.id.order_confirmed_toolbar);
         toolbar.setTitle("Getirt!");
         toolbar.setSubtitle("Sipariş Takip");
+
+        SessionController sessionController = new SessionController(this);
+        sessiodId = sessionController.getSessionId();
 
         setSupportActionBar(toolbar);
 
@@ -106,11 +110,11 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
                 marker = googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(lat, lng))
                         .title("Senin adresin"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(lat, lng), 10));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(
+                        new LatLng(lat, lng)));
                 googleMap.setIndoorEnabled(false);
             }
-        });
+        }); //initially location of the user added.
         initGoogleApiClient();
         mSocket.connect();
     }
@@ -198,7 +202,14 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
                 e.printStackTrace();
             }
             progress.dismiss();
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("sessionCode", sessiodId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             mSocket.on("messenger position", onNewLocation);
+            mSocket.emit("configuration", jsonObject);
         }
     }
 
@@ -218,7 +229,9 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
 
     private Emitter.Listener onNewLocation = new Emitter.Listener() {
         @Override
-        public void call(final Object... args) {
+        public void call(final Object... args)
+        {
+            /* this code block runs in a ui thread because it changes something on a view. */
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -232,6 +245,8 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
                                 messengerMarker = googleMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(lat, lng))
                                         .title("Kurye adresi"));
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(
+                                        new LatLng(lat, lng)));
                             }
                         });
                     } catch (JSONException e) {
