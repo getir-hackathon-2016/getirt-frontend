@@ -12,6 +12,10 @@ import com.eer.getirt.connections.ConnectionManager;
 import com.eer.getirt.utils.SessionController;
 
 /**
+ * Very first activity of the application. It looks network status and session status.
+ * if network status is false it shows a snackbar to refresh the activity and check the
+ * network status again. If network status is true, it looks session status and if the session is
+ * on on the device, it straightly goes to MainActivity.
  * Created by Ergun on 21.02.2016.
  */
 public class SplashActivity extends AppCompatActivity {

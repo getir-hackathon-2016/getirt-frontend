@@ -29,14 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences sharedpreferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        String sessionId = sharedpreferences.getString("session_id", "");
-        if(!sessionId.equals("")){
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        }
-
         EditText editTextEmail = (EditText)findViewById(R.id.login_edit_text_email);
         EditText editTextPassword = (EditText)findViewById(R.id.login_edit_text_password);
         Button buttonLogin = (Button)findViewById(R.id.login_button);
@@ -61,19 +53,13 @@ public class LoginActivity extends AppCompatActivity {
                     .make(v, "Kayıt başarılı! Giriş yapabilirsiniz.", Snackbar.LENGTH_LONG)
                     .show();
         }
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
 
+    /**
+     * OnClickListener class that handles the click event of the login button.
+     * It calls the LoginAsyncTask class from LoginUtils and execute it.
+     * @see com.eer.getirt.utils.LoginUtils.LoginAsyncTask
+     */
     public class LoginClickListener implements View.OnClickListener{
 
         EditText editTextEmail;

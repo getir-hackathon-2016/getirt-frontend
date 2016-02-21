@@ -12,7 +12,8 @@ import com.eer.getirt.R;
 import com.eer.getirt.utils.RegisterUtils;
 
 /**
- * A simple register activity.
+ * A simple register activity. Very much alike implementation with LoginActivity
+ * @see LoginActivity
  * Created by Ergun on 19.02.2016.
  */
 public class RegisterActivity extends AppCompatActivity {

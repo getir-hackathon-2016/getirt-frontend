@@ -43,6 +43,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
+ * Holds the main elements of the application. All navigations start from here.
+ * The GoogleMap in it is used for prediction of the time that an order goes.
+ * It contains the categories recycler view which can navigate the app to the
+ * ProductsActivity.
+ *
+ * It implements OnMapReadyCallback to sync with google map
+ * implements ConnectionCallBacks and ConnectionFailedListener to easily connect to
+ * the GoogleApiClient.
+ * It also implements LocationListener to act with the change in the location which is
+ * got by LocationServices.FusedLocationApi
  * Created by Ergun on 20.02.2016.
  */
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -103,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         initGoogleApiClient();
     }
 
+    /**
+     * When the map is ready, it pins a marker to the location of the device
+     * when the device moves, the pin also changes location in map.
+     * @param map
+     */
     @Override
     public void onMapReady(GoogleMap map) {
         Marker marker;
@@ -153,6 +168,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    /**
+     * Used to change the location of the marker when the location of the device changes.
+     * @param location
+     */
     @Override
     public void onLocationChanged(final Location location){
         mLastLocation = location;

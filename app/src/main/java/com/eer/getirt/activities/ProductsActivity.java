@@ -32,6 +32,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
+ * Holds a RecyclerView for products. The products can be added to cart.
+ * Also holds a FloatingActionButton to make users available to offer a new
+ * products.
  * Created by Ergun on 20.02.2016.
  */
 public class ProductsActivity extends AppCompatActivity {
