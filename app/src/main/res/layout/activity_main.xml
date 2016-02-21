@@ -7,6 +7,12 @@
     <!-- The main content view -->
 
     <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F0F0F0"
@@ -104,5 +110,6 @@
         android:layout_gravity="start"
         app:menu="@menu/drawer"
         android:background="@color/colorPrimaryDark"/>
+
 </android.support.v4.widget.DrawerLayout>
 

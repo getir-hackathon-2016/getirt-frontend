@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F0F0F0"
+    android:background="#e6e6e6"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,9 +16,29 @@
             app:theme="@style/ToolbarTheme">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sepetteki ürünleriniz."
+        android:textColor="#6c6c6c"
+        android:textSize="16sp"
+        android:padding="20dp"/>
+
+    <Button
+        android:id="@+id/header_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_button_background"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textColor="#FFFFFF"
+        android:text="Sepeti Onayla"/>
+
     <android.support.v7.widget.RecyclerView
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="4dp"
         android:background="#F0F0F0"
         android:id="@+id/basket_rv" />
+
+
 </LinearLayout>

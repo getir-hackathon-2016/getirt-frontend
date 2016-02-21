@@ -20,7 +20,7 @@ public class BasketProduct extends Product {
 
     public static ArrayList<BasketProduct> getDummyBasketData(){
         ArrayList<BasketProduct> products = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 10; i++){
             products.add(new BasketProduct("Name " + i, "" + i, "" + (i + 3), "denemeId"));
         }
         return products;
