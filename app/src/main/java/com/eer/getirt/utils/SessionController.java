@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
+ * A basic SharedPreferences session controller.
  * Created by Ergun on 20.02.2016.
  */
 public class SessionController {

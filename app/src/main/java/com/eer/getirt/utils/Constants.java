@@ -3,6 +3,7 @@ package com.eer.getirt.utils;
 import com.squareup.okhttp.MediaType;
 
 /**
+ * holds some constants.
  * Created by Ergun on 19.02.2016.
  */
 public class Constants {

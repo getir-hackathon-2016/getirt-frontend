@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
+ * Helps to get click events from RecyclerViews
  * Created by Ergun on 20.02.2016.
  */
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {

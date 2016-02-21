@@ -25,6 +25,13 @@ import java.io.IOException;
  */
 public class Utils {
 
+    /**
+     * Makes a get request to the requestUrl, it include headers appsecret and sessioncode
+     * which is used in server side
+     * @param requestUrl
+     * @param context
+     * @return
+     */
     public static JSONObject makeGetRequest(String requestUrl, Context context){
 
         SessionController sessionController = new SessionController((Activity)context);
@@ -56,6 +63,13 @@ public class Utils {
         return jsonObject;
     }
 
+    /**
+     * makes a post request to the requestUrl with given post parameters.
+     * @param requestUrl
+     * @param jsonObjectBody - post parameters as JSON object
+     * @param context
+     * @return the response from the server.
+     */
     public static JSONObject makePostRequest(String requestUrl, JSONObject jsonObjectBody, Context context){
         SessionController sessionController = new SessionController((Activity)context);
         String sessionId = sessionController.getSessionId();
