@@ -18,6 +18,7 @@
             android:theme="@style/ToolbarTheme"
             app:theme="@style/ToolbarTheme">
             <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/products_image_button_basket"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:scaleType="fitXY"

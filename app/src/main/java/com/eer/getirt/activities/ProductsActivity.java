@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.eer.getirt.R;
 import com.eer.getirt.adapters.RVProductsAdapter;
@@ -54,6 +55,15 @@ public class ProductsActivity extends AppCompatActivity {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rv.setLayoutManager(gridLayoutManager);
+
+        ImageButton imageButtonBasket = (ImageButton)findViewById(R.id.products_image_button_basket);
+        imageButtonBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductsActivity.this, BasketActivity.class);
+                startActivity(i);
+            }
+        });
 
         final RVProductsAdapter rvProductsAdapter = new RVProductsAdapter(Product.getDummyData(), this);
         rv.setAdapter(rvProductsAdapter);

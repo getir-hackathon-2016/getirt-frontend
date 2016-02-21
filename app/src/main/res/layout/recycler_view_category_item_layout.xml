@@ -7,7 +7,7 @@
     android:foreground="@drawable/card_foreground"
     android:clickable="true"
     app:cardUseCompatPadding="true"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="10dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap map) {
         Marker marker;
-        marker = map.addMarker(new MarkerOptions()
+        mCurrLocationMarker = map.addMarker(new MarkerOptions()
                 .position(new LatLng(41.085170, 29.050868))
                 .title("Senin adresin"));
 
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 new LatLng(41.085170, 29.050868), 10));
         map.setIndoorEnabled(false);
 
-        map.setOnMapClickListener(new MapClickListener(map, marker));
+        map.setOnMapClickListener(new MapClickListener(map, mCurrLocationMarker));
         map.setMyLocationEnabled(true);
 
         map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
@@ -179,20 +179,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mCurrLocationMarker.remove();
         }
 
-        //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        final MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Şimdiki pozisyonun");
-
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title("Şimdiki pozisyonun");
+
                 mCurrLocationMarker = googleMap.addMarker(markerOptions);
 
+                googleMap.setOnMapClickListener(new MapClickListener(googleMap, mCurrLocationMarker));
                 //move map camera
                 googleMap.moveCamera(CameraUpdateFactory.
-                        newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+                        newLatLng(latLng));
 
             }
         });
