@@ -4,8 +4,8 @@
     android:id="@+id/category_item_layout_card_view"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:background="#FFFFFF"
+    android:foreground="@drawable/card_foreground"
+    android:clickable="true"
     app:cardUseCompatPadding="true"
     android:layout_marginBottom="16dp">
     <RelativeLayout

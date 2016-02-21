@@ -66,7 +66,7 @@ public class ConnectionManager {
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("productNo", productId);
-            jsonObject.put("number", 1);
+            jsonObject.put("number", "1");
             jsonObject.put("doo", "increase");
         } catch (JSONException e) {
             e.printStackTrace();

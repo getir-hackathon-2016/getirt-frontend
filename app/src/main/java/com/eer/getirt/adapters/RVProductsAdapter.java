@@ -50,7 +50,7 @@ public class RVProductsAdapter extends RecyclerView.Adapter<RVProductsAdapter.Pr
     @Override
     public void onBindViewHolder(ProductsViewHolder holder, int position) {
         holder.textViewName.setText(products.get(position).getProductName());
-        holder.textViewPrice.setText(products.get(position).getProductPriceStr());
+        holder.textViewPrice.setText(products.get(position).getProductPriceStr() + " TL");
     }
 
     @Override

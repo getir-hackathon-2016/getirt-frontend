@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             PackageManager.PERMISSION_GRANTED) {
                         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, MainActivity.this);
                     }else{
-                        LocationService.requestLocationPermission();
+                        LocationService.requestLocationPermission(R.id.drawer_layout);
                     }
                 }
                 return false;

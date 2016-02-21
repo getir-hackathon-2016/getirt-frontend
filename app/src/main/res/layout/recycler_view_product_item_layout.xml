@@ -5,6 +5,8 @@
     android:id="@+id/product_item_layout_card_view"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
+    android:foreground="@drawable/card_foreground"
+    android:clickable="true"
     card_view:cardUseCompatPadding="true"
     android:layout_marginBottom="16dp">
 

@@ -193,7 +193,7 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
                         String quantity = jsonBasketProduct.getString("number");
                         String productId = jsonBasketProduct.getString("_id");
 
-                        BasketProduct basketProduct = new BasketProduct(name, price, quantity, productId);
+                        BasketProduct basketProduct = new BasketProduct(name, price + " TL", quantity, productId);
                         basketProducts.add(basketProduct);
                     }
                     //Log.d("Basket products : ", basketProduct);
