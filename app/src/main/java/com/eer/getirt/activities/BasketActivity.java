@@ -137,6 +137,11 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
                 Place place = PlacePicker.getPlace(this, data);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+
+                Intent i = new Intent(this, OrderConfirmedActivity.class);
+                i.putExtra("latlng", place.getLatLng());
+                i.putExtra("address", place.getAddress());
+                startActivity(i);
             }
         }
     }
