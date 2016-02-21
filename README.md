@@ -14,11 +14,10 @@ Uygulamada kayýt olma ve giriþ yapma ekranlarý dýþýnda 5 ekran vardýr.
 ## Kullanýlan Kütüphaneler
 
 1. Support kütüphaneleri
-   *appcompat v7
-   *design
-   *cardview
-   *recyclerview
-
+  *appcompat v7
+  *design
+  *cardview
+  *recyclerview
 2. Google Play Services
 3. OkHttp
 4. Material Dialogs - (afollestad)
