@@ -75,6 +75,21 @@ public class ConnectionManager {
         return Utils.makePostRequest(requestUrl, jsonObject, context);
     }
 
+    public static JSONObject confirmBasket(Context context, String address, double locationX, double locationY){
+        String requestUrl = Constants.serverUrl + "/buy";
+
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("address", address);
+            jsonObject.put("addressX", locationX);
+            jsonObject.put("addressY", locationY);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return Utils.makePostRequest(requestUrl, jsonObject, context);
+    }
+
     /**
      * returns whether the device has a network connection.
      * @param context

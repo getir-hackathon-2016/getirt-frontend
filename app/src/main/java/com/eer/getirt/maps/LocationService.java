@@ -13,16 +13,7 @@ import android.view.View;
  */
 public class LocationService{
 
-    static Context context;
-
-    public LocationService(Context context){
-        this.context = context;
-    }
-
-    /**
-     * Makes a request ACCESS_FINE_LOCATION permission in runtime.
-     */
-    public static void requestLocationPermission(int viewId){
+    public static void requestLocationPermission(final Context context, int viewId){
         if (ActivityCompat.shouldShowRequestPermissionRationale((Activity)context,
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
 

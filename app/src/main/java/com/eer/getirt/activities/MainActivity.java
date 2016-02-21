@@ -130,7 +130,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         map.setIndoorEnabled(false);
 
         map.setOnMapClickListener(new MapClickListener(map, mCurrLocationMarker));
-        map.setMyLocationEnabled(true);
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+        }else{
+            LocationService.requestLocationPermission(this, R.id.drawer_layout);
+        }
 
         map.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
@@ -142,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             PackageManager.PERMISSION_GRANTED) {
                         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, MainActivity.this);
                     }else{
-                        LocationService.requestLocationPermission(R.id.drawer_layout);
+                        LocationService.requestLocationPermission(MainActivity.this, R.id.drawer_layout);
                     }
                 }
                 return false;

@@ -139,8 +139,9 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
 
                 Intent i = new Intent(this, OrderConfirmedActivity.class);
-                i.putExtra("latlng", place.getLatLng());
-                i.putExtra("address", place.getAddress());
+                i.putExtra("lat", place.getLatLng().latitude);
+                i.putExtra("lng", place.getLatLng().longitude);
+                i.putExtra("address", place.getAddress().toString());
                 startActivity(i);
             }
         }
