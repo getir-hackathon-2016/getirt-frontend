@@ -34,5 +34,13 @@ public class SessionController {
         return(sharedPreferences.getString("session_id", ""));
     }
 
+    public boolean isSessionOn(){
+        String sessionId = getSessionId();
+        if(sessionId.equals("")){
+            return false;
+        }
+        return true;
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package com.eer.getirt.connections;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.eer.getirt.utils.Constants;
 import com.eer.getirt.utils.Utils;
@@ -41,6 +43,14 @@ public class ConnectionManager {
         }
 
         return Utils.makePostRequest(requestUrl, jsonObject, context);
+    }
+
+    public static boolean isNetworkConnected(Context context)
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
 }

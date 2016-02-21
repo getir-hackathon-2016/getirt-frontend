@@ -1,6 +1,5 @@
 package com.eer.getirt.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,10 +18,8 @@ import android.widget.Toast;
 
 import com.eer.getirt.R;
 import com.eer.getirt.adapters.RVBasketAdapter;
-import com.eer.getirt.adapters.RVCategoryAdapter;
 import com.eer.getirt.connections.ConnectionManager;
 import com.eer.getirt.models.BasketProduct;
-import com.eer.getirt.models.Category;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -38,6 +35,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
+ * Basket (Cart) activity; shows user his cart, enables it to change/delete
+ * the cart items. When the cart is confirmed it takes an address with
+ * Google Places API and sends cart information to the server.
  * Created by Ergun on 20.02.2016.
  */
 public class BasketActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -71,7 +71,7 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmBasketList();
+                pickAPlace();
             }
         });
 
@@ -107,8 +107,11 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
         super.onBackPressed();
     }
 
-
-    public void confirmBasketList(){
+    /**
+     * Goes to PlacePicker intent, choses an address and returns with same
+     * request code. Then the Intent result is handled in OnActivityResult
+     */
+    public void pickAPlace(){
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
@@ -120,6 +123,13 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
 
     }
 
+    /**
+     * Handles the intent result which contains a Place data then sends server the basket data
+     * and place address.
+     * @param requestCode - intent request code
+     * @param resultCode - intent result code
+     * @param data - intent data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -127,8 +137,6 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }
-            
-
         }
     }
 
@@ -137,7 +145,10 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
         Log.d("BASKET_GOOGLE", "failed");
     }
 
-
+    /**
+     * AsyncTask class which asynchronously gets BasketProduct data after getting the data
+     * it changes the adapter of the RecyclerView in BasketActivity
+     */
     class GetBasketProductsAsyncTask extends AsyncTask<Void, Void, JSONObject>{
 
         RVBasketAdapter rvBasketAdapter;
