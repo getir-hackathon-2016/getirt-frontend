@@ -11,9 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 
 import com.eer.getirt.R;
 import com.eer.getirt.adapters.RVProductsAdapter;
@@ -65,8 +69,16 @@ public class ProductsActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProductsActivity.this);
 
                 builder.setTitle("Ürün öner");
-
-                AlertDialog dialog = builder.create();
+                final AlertDialog dialog = builder.create();
+                View rootView = LayoutInflater.from(ProductsActivity.this).inflate(R.layout.dialog_request_item, null);
+                dialog.setView(rootView);
+                Button b = (Button)rootView.findViewById(R.id.button_request);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
                 dialog.show();
 
             }

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Created by Ergun on 20.02.2016.
  */
-public class BasketActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class BasketActivity extends AppCompatActivity {
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -70,14 +70,6 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
 
         new GetBasketProductsAsyncTask(rvBasketAdapter).execute();
 
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(this, this)
-                .build();
-
-
     }
 
     @Override
@@ -93,10 +85,6 @@ public class BasketActivity extends AppCompatActivity implements GoogleApiClient
         super.onBackPressed();
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d("Google Api connection failed", "connection failed");
-    }
 
     class GetBasketProductsAsyncTask extends AsyncTask<Void, Void, JSONObject>{
 
