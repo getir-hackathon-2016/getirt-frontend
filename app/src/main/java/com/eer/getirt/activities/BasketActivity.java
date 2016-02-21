@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.eer.getirt.R;
 import com.eer.getirt.adapters.RVBasketAdapter;
@@ -23,8 +24,12 @@ import com.eer.getirt.connections.ConnectionManager;
 import com.eer.getirt.models.BasketProduct;
 import com.eer.getirt.models.Category;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,9 +40,11 @@ import java.util.ArrayList;
 /**
  * Created by Ergun on 20.02.2016.
  */
-public class BasketActivity extends AppCompatActivity {
+public class BasketActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
+    private String address;
+    int PLACE_PICKER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -64,12 +71,27 @@ public class BasketActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                confirmBasketList();
             }
         });
 
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
+
         new GetBasketProductsAsyncTask(rvBasketAdapter).execute();
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        if(mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
     }
 
     @Override
@@ -83,6 +105,36 @@ public class BasketActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
+    }
+
+
+    public void confirmBasketList(){
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+            
+
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d("BASKET_GOOGLE", "failed");
     }
 
 
@@ -142,7 +194,6 @@ public class BasketActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
         }
-
     }
 
 }
