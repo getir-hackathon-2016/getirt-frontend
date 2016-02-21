@@ -242,9 +242,13 @@ public class OrderConfirmedActivity extends AppCompatActivity implements GoogleA
                         mapFragment.getMapAsync(new OnMapReadyCallback() {
                             @Override
                             public void onMapReady(GoogleMap googleMap) {
-                                messengerMarker = googleMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(lat, lng))
-                                        .title("Kurye adresi"));
+                                if(messengerMarker == null) {
+                                    messengerMarker = googleMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(lat, lng))
+                                            .title("Kurye adresi"));
+                                }else{
+                                    messengerMarker.setPosition(new LatLng(lat, lng));
+                                }
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(
                                         new LatLng(lat, lng)));
                             }

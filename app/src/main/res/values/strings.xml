@@ -16,4 +16,5 @@
     <string name="already_a_user">Üye misin? giriş yap!</string>
 
     <string name="shopping_cart">Sepet</string>
+    <string name="cart_loading">Sepetiniz yükleniyor.</string>
 </resources>
