@@ -13,6 +13,7 @@ import com.eer.getirt.models.BasketProduct;
 import java.util.ArrayList;
 
 /**
+ * A usual RecyclerViewAdapter except changeDataList method.
  * Created by Ergun on 20.02.2016.
  */
 public class RVBasketAdapter extends RecyclerView.Adapter<RVBasketAdapter.BasketViewHolder> {
@@ -62,6 +63,13 @@ public class RVBasketAdapter extends RecyclerView.Adapter<RVBasketAdapter.Basket
         return basketProducts.size();
     }
 
+
+    /**
+     * It changes the datalist and notifies the adapter. It is useful because it
+     * gives us permission to change the datalist of the adapter wherever we can
+     * reach the adapter.
+     * @param basketProducts
+     */
     public void changeDataList(ArrayList<BasketProduct> basketProducts){
         this.basketProducts = basketProducts;
         notifyDataSetChanged();

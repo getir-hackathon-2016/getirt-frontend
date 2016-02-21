@@ -15,6 +15,7 @@ import com.eer.getirt.models.Category;
 import java.util.ArrayList;
 
 /**
+ * @see RVBasketAdapter
  * Created by Ergun on 20.02.2016.
  */
 public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.CategoryViewHolder> {

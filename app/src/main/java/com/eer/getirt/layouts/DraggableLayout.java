@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 
 /**
+ * Just a try to make a draggable layout, but not to lose too much time, I quit.
  * Created by Ergun on 20.02.2016.
  */
 public class DraggableLayout extends LinearLayout {

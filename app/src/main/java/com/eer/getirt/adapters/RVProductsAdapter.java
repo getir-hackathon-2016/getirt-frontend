@@ -15,6 +15,7 @@ import com.eer.getirt.models.Product;
 import java.util.ArrayList;
 
 /**
+ * @see RVBasketAdapter
  * Created by Ergun on 20.02.2016.
  */
 public class RVProductsAdapter extends RecyclerView.Adapter<RVProductsAdapter.ProductsViewHolder> {
